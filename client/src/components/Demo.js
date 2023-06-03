@@ -1,4 +1,7 @@
-const DemoPage = () =>{
+import { useState } from "react";
+
+const DemoFuncPage = () =>{
+    const [username, setUsername] = useState('Pesho');
     const onSubmitHandler = (e) => {
         e.preventDefault();
         console.log(e.target.username.value);
@@ -7,14 +10,15 @@ const DemoPage = () =>{
     }
 
     const onUsernameChangeHandler = (e) =>{
-        console.log(e.target.value);
+        setUsername(e.target.value);
     }
+
     return (
         <div>
             <h1>Demo Form</h1>
             <form onSubmit={onSubmitHandler}>
                 <label htmlFor="username">Username</label>
-                <input type="text" id="username" name="username" onChange={onUsernameChangeHandler}/>
+                <input type="text" id="username" name="username" value={username} onChange={onUsernameChangeHandler}/>
                 <label htmlFor="age">Age</label>
                 <input type="number" id="age" name="age"/>
                 <input type="submit" value="Submit"/>
@@ -24,4 +28,4 @@ const DemoPage = () =>{
     );
 }
 
-export default DemoPage;
+export default DemoFuncPage;
