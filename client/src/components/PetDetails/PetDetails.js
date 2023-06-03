@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+import {useParams, Link} from 'react-router-dom';
+
 import * as petService from '../../services/petService';
-import {useParams} from 'react-router-dom';
 
 const PetDetails = ()=>{
     const params = useParams();
-    console.log('Pet ID');
-    console.log(params.petId);
+    // console.log('Pet ID');
+    // console.log(params.petId);
     let [pet,setPet] = useState({});
     useEffect(()=>{
         petService.getOne(params.petId)
@@ -20,6 +21,10 @@ const PetDetails = ()=>{
                 </p>
                 <p className="img"><img src={pet.imageURL}/></p>
 				<p className="description">{pet.description}</p>
+                <div class="pet-info">
+                    <Link to={`/pets/details/${pet.id}/edit`}><button class="button">Edit</button></Link>
+                    <Link to="#"><button class="button">Delete</button></Link>
+                </div>
             </section>
     );
 }

@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-const Pet = ({id, name, category, description, imageURL, likes}) =>{
+const PetCard = ({id, name, category, description, imageURL, likes}) =>{
     console.log(id);
     return (
         <li className="otherPet">
@@ -17,4 +17,4 @@ const Pet = ({id, name, category, description, imageURL, likes}) =>{
     );
 }
 
-export default Pet;
+export default PetCard;
