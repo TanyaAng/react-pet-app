@@ -1,23 +1,32 @@
 import {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useNavigate} from 'react-router-dom';
+
 
 import * as petService from '../../services/petService';
 import InputError from '../Shared/InputError';
 
 const PetEdit = () => {
+    const history = useNavigate();
 
     const [pet, setPet] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
     const params = useParams();
 
+    const petId = params.petId
+
     useEffect(()=>{
-        petService.getOne(params.petId)
+        petService.getOne(petId)
         .then(res=>setPet(res));
     },[]);
 
     const onChangeDescriptionHandler= (e)=>{
         e.preventDefault();
-        console.log(e.target.description.value);
+        let updatedPet = {...pet, description: e.target.description.value};
+        petService.update(petId, updatedPet)
+        .then(()=>
+        history(`/pets/details/${petId}`)
+        );
+        return;
     }
 
     const onDescriptionChangeHandler = (e) => {

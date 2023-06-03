@@ -31,3 +31,14 @@ export const create = (petName, description, imageURL, category) =>{
 });
 };
 
+export const update = (petId, pet) => {
+    const url = 'http://localhost:5000/pets';
+    return fetch(`${url}/${petId}`,{
+        method:"PUT",
+        header: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(pet)
+    });
+};
+
